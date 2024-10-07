@@ -68,3 +68,138 @@ Jetzt sollte ein Großteil der Windows-Shortcuts wie bekannt funktionieren.
 
 Wenn du gerade schon dabei bist Karabiner einzurichten, dann interessiert dich vielleicht auch, wie du mit dem Mausrad in die gewohnte Richtung scrollen kannst, ohne die Funktion des Trackpads zu verändern. Wie Karabiner-Elements dir dabei helfen kann, erfährst du [hier](https://dev.azure.com/krz-devops/DeveloperGuide/_wiki/wikis/DeveloperGuide/12343/Useful-Stuff#scrolling).
 
+
+# Sound
+`System-Settings -> Sound -> Play Sound on startup` -> uncheck
+
+# Weitere Shortcuts
+
+## System-Settings
+
+In `System-Settings -> Keyboard -> Keyboard Shortcuts` sollten noch ein paar weiteres Änderungen gemacht werden, um mehr Shortcuts auf die gewohnten Windows-Tastenkombinationen zu ändern:
+
+- "Mission Control
+  - Show Desktop: `WIN + D`
+  - Mission Control: Win + Tab
+  - Application windows: Uncheck
+  - Mission Control -> Move left a space: Uncheck
+  - Mission Control -> Move right a space: Uncheck
+- "Screenshots -> Screenshot and recording options": `WIN + Shift + S`
+- "Services -> Searching -> Search With Google": Uncheck 
+- "Function Keys -> Use F1, F2, ...": Check
+- "Input Sources -> Uncheck everything!!!"
+
+## Rectangle: Andock-Bereiche für Fenstern
+
+Um das bekannte Andocken von Programmfenstern auch auf Mac zu erhalten ist das Tool "Rectangle" zu installieren:
+
+```
+brew install --cask rectangle
+```
+
+Für die optimale Windows-Nachahmung sind folgenden Konfigurationen in Rectangle zu treffen:
+
+- "Left Half": `WIN + Pfeiltaste Links`
+- "Right Half": `WIN + Pfeiltaste Rechts`
+- "Center Half": `WIN + Pfeiltaste unten`
+- "Maximize": `WIN + Pfeiltaste oben`
+- "Settings Tab -> Launch on login": Check
+- "Settings Tab -> Hide menu bar icon": Check
+
+Falls bestimmte Keybinds nicht funktionieren muss in den Einstellungen von Rectangle `remove Keyboard shortcut restrictions` ausgewählt werden.
+## Maccy: Zwischenablagen-Historie
+
+Um die Windows-Zwischenablagen-Historie auch auf Mac zu bekommen ist das Tool "Maccy" zu installieren:
+
+```
+brew install --cask maccy
+```
+
+Für die optimale Windows-Nachahmung sind folgenden Konfigurationen in Maccy zu treffen:
+
+"Preferences":
+- "General -> Open": `WIN + V`
+- "General -> Launch at login": Check
+- "General -> Behaviour -> Paste automatically": Check
+- "Appearance -> Image height": 30
+- "Appearance -> Number of items": 30
+- "Appearance -> Show menu icon": Uncheck
+- "Advanced -> Avoid taking application focus": Check
+
+# Scrolling
+
+Damit das Mausrad der Maus in die gewohnte Richtung scrollt UND das Trackpad weiterhin die "intuitive" Richtung beibehält, müssen folgende Einstellungen in Karabiner-Elements vorgenommen werden.
+
+- "Devices" -> "Modify events" bei angeschlossener Maus -> "Flip mouse vertical wheel"
+- "Devices" -> "Modify events" bei angeschlossener Maus -> "Flip mouse horizontal wheel"
+
+![image.png](/.attachments/image-44e1eb31-8933-4ff9-9e15-62052904b48a.png =350x)
+
+
+# Dock
+
+Folgende Einstellungen sollten für das Dock getroffen werden:
+
+- "System-Settings -> Desktop & Dock -> Show suggested and recent apps in Dock": Uncheck
+
+Dies räumt das Dock ein wenig mehr auf. Wenn nun noch Trenner in das Dock hinzugefügt werden sollen, dann kann der folgenden Befehl ausgeführt werden:
+
+```
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'; killall Dock
+
+killall Dock
+```
+
+Für mehr Divider den ersten Befehl mehrfach ausführen vor dem  `killall Dock`.
+
+Falls du das Dock lieber links oder rechts anbinden möchtest, kannst du mit Rechtsklick auf dem Dock unter "Position On Screen" dies einstellen.
+
+# Finder
+
+Empfohlene Einstellungen: <br>
+![image.png](/.attachments/image-0f4a5507-c715-4690-982f-f961876dbc31.png =500x)
+
+(Dafür: Finder öffnen -> dann in der **Leiste am oberen Rand**, neben dem Apple Logo: Finder auswählen  -> und dann `Settings` anklicken!)
+- "Finder-Settings -> General -> New Finder windows show": Home-Verzeichnis
+- "Finder-Settings -> Sidebar": _Aufräumen_
+- "Finder-Settings -> Advanced"
+  - "Show all filename extensions": Check
+  - "When performing a search": Search the Current Folder
+
+In der **Leiste oben** befindet sich auch `View`. <br>
+Achtung: Finder muss das aktive Fenster sein. 
+- "View -> as List": Check
+- "View -> Show Tab Bar": Check
+- "View -> Show Status Bar": Check
+- "View -> Show Path Bar": Check
+- "View -> Show View Options": Check
+- "View Options -> Use as Defaults"
+- "View -> Show View Options": Uncheck
+
+Im Terminal folgendes ausführen, damit **versteckte Dateien** angezeigt werden:
+- `defaults write com.apple.Finder AppleShowAllFiles true; killall Finder `
+
+# Shortcuts und Automator
+- ermöglicht das Automatisieren von verschiedenen Apps, inklusive dem Terminal
+- mögliche Beispiele [hier](https://gist.github.com/Taekaze/d97c6f5d0af72913a5c6ae451e5ec306)
+  - Die Anwendung `Shortcuts` öffnen und per Plus-Icon ein neues Shortcut erzeugen
+  - Terminal-Step auswählen, Beispiel kopieren und einfügen, z.B. <br>
+![image.png](/.attachments/image-a4a5ad05-0144-4485-acb4-88b05274fc2f.png =500x)
+- erstellte Shortcuts sind über verschiedene Wege zu erreichen
+  - Shortcuts können per Spotlight gefunden und ausgeführt werden
+  - Folgende weitere Möglichkeiten bestehen:<br>
+![image.png](/.attachments/image-296bb893-6328-4c8b-8143-3c9db98394ce.png =200x)
+- Ihr müsst bei Keyboard Shortcuts selbst auf Konflikte achten
+- Alternativ dazu bietet Automator ähnliche Funktionalität für komplexere Fälle
+
+# Sonstige Empfehlungen
+
+- Repeat character while key held: `defaults write -g ApplePressAndHoldEnabled -bool false`
+- System Settings -> Desktop & Dock
+  - Minimize windows: Scale Effect
+  - Show suggested and recent apps in Dock: Uncheck
+  - Minimise windows into application icon: Uncheck
+  - Click wallpaper to reveal desktop: Only in Stage Manager
+- System Settings -> Accessibility -> Display -> Pointer -> 'Shake mouse pointer to locate' deaktivieren 
+
+
